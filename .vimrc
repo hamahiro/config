@@ -1,19 +1,19 @@
 
 
 "-----------------------------------------------------------------------------
-" ¥×¥é¥°¥¤¥ó´ØÏ¢
+" ãƒ—ãƒ©ã‚°ã‚¤ãƒ³é–¢é€£
 "
 " --- autocomplpop ---
 autocmd FileType * let g:AutoComplPop_CompleteOption = '.,w,b,u,t,i'
 autocmd FileType perl let g:AutoComplPop_CompleteOption = '.,w,b,u,t,k~/.vim/dict/perl.dict'
 "let g:AutoComplPop_IgnoreCaseOption = 1
 
-" ¥İ¥Ã¥×¥¢¥Ã¥×¥á¥Ë¥å¡¼¤Î¥«¥é¡¼¤òÀßÄê
+" ãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®ã‚«ãƒ©ãƒ¼ã‚’è¨­å®š
 hi Pmenu guibg=#666677
 hi PmenuSel guibg=#8cd0d3 guifg=#556666
 hi PmenuSbar guibg=#333333
 
-" ¥³¥á¥ó¥È¤Î¥ª¡¼¥È¥¤¥ó¥Ç¥ó¥È¤ò¤·¤Ê¤¤
+" ã‚³ãƒ¡ãƒ³ãƒˆã®ã‚ªãƒ¼ãƒˆã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆã‚’ã—ãªã„
 " http://d.hatena.ne.jp/dayflower/20081208/1228725403
 if has("autocmd")
   autocmd FileType *
@@ -23,7 +23,7 @@ endif
 
 
 "-----------------------------------------------------------------------------
-" Ê¸»ú¥³¡¼¥É´ØÏ¢
+" æ–‡å­—ã‚³ãƒ¼ãƒ‰é–¢é€£
 "
 if &encoding !=# 'utf-8'
 	set encoding=japan
@@ -32,16 +32,16 @@ endif
 if has('iconv')
 	let s:enc_euc = 'euc-jp'
 	let s:enc_jis = 'iso-2022-jp'
-	" iconv¤¬eucJP-ms¤ËÂĞ±ş¤·¤Æ¤¤¤ë¤«¤ò¥Á¥§¥Ã¥¯
+	" iconvãŒeucJP-msã«å¯¾å¿œã—ã¦ã„ã‚‹ã‹ã‚’ãƒã‚§ãƒƒã‚¯
 	if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
 		let s:enc_euc = 'eucjp-ms'
 		let s:enc_jis = 'iso-2022-jp-3'
-	" iconv¤¬JISX0213¤ËÂĞ±ş¤·¤Æ¤¤¤ë¤«¤ò¥Á¥§¥Ã¥¯
+	" iconvãŒJISX0213ã«å¯¾å¿œã—ã¦ã„ã‚‹ã‹ã‚’ãƒã‚§ãƒƒã‚¯
 	elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
 		let s:enc_euc = 'euc-jisx0213'
 		let s:enc_jis = 'iso-2022-jp-3'
 	endif
-	" fileencodings¤ò¹½ÃÛ
+	" fileencodingsã‚’æ§‹ç¯‰
 	if &encoding ==# 'utf-8'
 		let s:fileencodings_default = &fileencodings
 		let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
@@ -61,11 +61,11 @@ if has('iconv')
 			let &fileencodings = &fileencodings .','. s:enc_euc
 		endif
 	endif
-	" Äê¿ô¤ò½èÊ¬
+	" å®šæ•°ã‚’å‡¦åˆ†
 	unlet s:enc_euc
 	unlet s:enc_jis
 endif
-" ÆüËÜ¸ì¤ò´Ş¤Ş¤Ê¤¤¾ì¹ç¤Ï fileencoding ¤Ë encoding ¤ò»È¤¦¤è¤¦¤Ë¤¹¤ë
+" æ—¥æœ¬èªã‚’å«ã¾ãªã„å ´åˆã¯ fileencoding ã« encoding ã‚’ä½¿ã†ã‚ˆã†ã«ã™ã‚‹
 if has('autocmd')
 	function! AU_ReCheck_FENC()
 		if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
@@ -74,21 +74,21 @@ if has('autocmd')
 	endfunction
 	autocmd BufReadPost * call AU_ReCheck_FENC()
 endif
-" ²ş¹Ô¥³¡¼¥É¤Î¼«Æ°Ç§¼±
+" æ”¹è¡Œã‚³ãƒ¼ãƒ‰ã®è‡ªå‹•èªè­˜
 set fileformats=unix,dos,mac
-" ¢¢¤È¤«¡û¤ÎÊ¸»ú¤¬¤¢¤Ã¤Æ¤â¥«¡¼¥½¥ë°ÌÃÖ¤¬¤º¤ì¤Ê¤¤¤è¤¦¤Ë¤¹¤ë
+" â–¡ã¨ã‹â—‹ã®æ–‡å­—ãŒã‚ã£ã¦ã‚‚ã‚«ãƒ¼ã‚½ãƒ«ä½ç½®ãŒãšã‚Œãªã„ã‚ˆã†ã«ã™ã‚‹
 if exists('&ambiwidth')
 	set ambiwidth=double
 endif
 
 "-----------------------------------------------------------------------------
-" ÊÔ½¸´ØÏ¢
+" ç·¨é›†é–¢é€£
 "
-"¥ª¡¼¥È¥¤¥ó¥Ç¥ó¥È¤¹¤ë
+"ã‚ªãƒ¼ãƒˆã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆã™ã‚‹
 "set autoindent
-set smartindent " AutoIndent ¤è¤ê¤â¸­¤¤¥¤¥ó¥Ç¥ó¥È
+set smartindent " AutoIndent ã‚ˆã‚Šã‚‚è³¢ã„ã‚¤ãƒ³ãƒ‡ãƒ³ãƒˆ
 
-"¥Ğ¥¤¥Ê¥êÊÔ½¸(xxd)¥â¡¼¥É¡Êvim -b ¤Ç¤Îµ¯Æ°¡¢¤â¤·¤¯¤Ï *.bin ¤ÇÈ¯Æ°¤·¤Ş¤¹¡Ë
+"ãƒã‚¤ãƒŠãƒªç·¨é›†(xxd)ãƒ¢ãƒ¼ãƒ‰ï¼ˆvim -b ã§ã®èµ·å‹•ã€ã‚‚ã—ãã¯ *.bin ã§ç™ºå‹•ã—ã¾ã™ï¼‰
 augroup BinaryXXD
 	autocmd!
 	autocmd BufReadPre  *.bin let &binary =1
@@ -99,94 +99,94 @@ augroup BinaryXXD
 	autocmd BufWritePost * set nomod | endif
 augroup END
 
-"¥¹¥¯¥í¡¼¥ë¥Ş¡¼¥¸¥ó
+"ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼ã‚¸ãƒ³
 set scrolloff=9
-" ¥Ğ¥Ã¥¯¥¹¥Ú¡¼¥¹¤Î¶¯²½
-set backspace=indent,eol,start "eol:²ş¹Ô,start:ÆşÎÏ¥â¡¼¥É¤ËÆş¤ëÁ°¤ÎÊ¸»ú
+" ãƒãƒƒã‚¯ã‚¹ãƒšãƒ¼ã‚¹ã®å¼·åŒ–
+set backspace=indent,eol,start "eol:æ”¹è¡Œ,start:å…¥åŠ›ãƒ¢ãƒ¼ãƒ‰ã«å…¥ã‚‹å‰ã®æ–‡å­—
 
 
 "-----------------------------------------------------------------------------
-" ¸¡º÷´ØÏ¢
+" æ¤œç´¢é–¢é€£
 "
-"¸¡º÷Ê¸»úÎó¤¬¾®Ê¸»ú¤Î¾ì¹ç¤ÏÂçÊ¸»ú¾®Ê¸»ú¤ò¶èÊÌ¤Ê¤¯¸¡º÷¤¹¤ë
+"æ¤œç´¢æ–‡å­—åˆ—ãŒå°æ–‡å­—ã®å ´åˆã¯å¤§æ–‡å­—å°æ–‡å­—ã‚’åŒºåˆ¥ãªãæ¤œç´¢ã™ã‚‹
 set ignorecase
-"¸¡º÷Ê¸»úÎó¤ËÂçÊ¸»ú¤¬´Ş¤Ş¤ì¤Æ¤¤¤ë¾ì¹ç¤Ï¶èÊÌ¤·¤Æ¸¡º÷¤¹¤ë
+"æ¤œç´¢æ–‡å­—åˆ—ã«å¤§æ–‡å­—ãŒå«ã¾ã‚Œã¦ã„ã‚‹å ´åˆã¯åŒºåˆ¥ã—ã¦æ¤œç´¢ã™ã‚‹
 set smartcase
-"¸¡º÷»ş¤ËºÇ¸å¤Ş¤Ç¹Ô¤Ã¤¿¤éºÇ½é¤ËÌá¤ë
+"æ¤œç´¢æ™‚ã«æœ€å¾Œã¾ã§è¡Œã£ãŸã‚‰æœ€åˆã«æˆ»ã‚‹
 set wrapscan
-"¸¡º÷Ê¸»úÎóÆşÎÏ»ş¤Ë½ç¼¡ÂĞ¾İÊ¸»úÎó¤Ë¥Ò¥Ã¥È¤µ¤»¤Ê¤¤
+"æ¤œç´¢æ–‡å­—åˆ—å…¥åŠ›æ™‚ã«é †æ¬¡å¯¾è±¡æ–‡å­—åˆ—ã«ãƒ’ãƒƒãƒˆã•ã›ãªã„
 "set noincsearch
-set incsearch	" ¥¤¥ó¥¯¥ê¥á¥ó¥¿¥ë¥µ¡¼¥Á¤òÍ­¸ú¤Ë¤¹¤ë
+set incsearch	" ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ã‚¿ãƒ«ã‚µãƒ¼ãƒã‚’æœ‰åŠ¹ã«ã™ã‚‹
 
 "-----------------------------------------------------------------------------
-" Áõ¾ş´ØÏ¢
+" è£…é£¾é–¢é€£
 "
-"¥·¥ó¥¿¥Ã¥¯¥¹¥Ï¥¤¥é¥¤¥È¤òÍ­¸ú¤Ë¤¹¤ë
+"ã‚·ãƒ³ã‚¿ãƒƒã‚¯ã‚¹ãƒã‚¤ãƒ©ã‚¤ãƒˆã‚’æœ‰åŠ¹ã«ã™ã‚‹
 if has("syntax")
 	syntax on
 endif
-"¹ÔÈÖ¹æ¤òÉ½¼¨¤·¤Ê¤¤
+"è¡Œç•ªå·ã‚’è¡¨ç¤ºã—ãªã„
 set nonumber
-"¥«¡¼¥½¥ëÉ½¼¨
+"ã‚«ãƒ¼ã‚½ãƒ«è¡¨ç¤º
 set cursorline
-"¥¿¥Ö¤Îº¸Â¦¤Ë¥«¡¼¥½¥ëÉ½¼¨
+"ã‚¿ãƒ–ã®å·¦å´ã«ã‚«ãƒ¼ã‚½ãƒ«è¡¨ç¤º
 "set listchars=tab:\ \ 
 "set list
-"¥¿¥ÖÉı¤òÀßÄê¤¹¤ë
+"ã‚¿ãƒ–å¹…ã‚’è¨­å®šã™ã‚‹
 set tabstop=4
 set shiftwidth=4
-"ÆşÎÏÃæ¤Î¥³¥Ş¥ó¥É¤ò¥¹¥Æ¡¼¥¿¥¹¤ËÉ½¼¨¤¹¤ë
+"å…¥åŠ›ä¸­ã®ã‚³ãƒãƒ³ãƒ‰ã‚’ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã«è¡¨ç¤ºã™ã‚‹
 set showcmd
-"³ç¸ÌÆşÎÏ»ş¤ÎÂĞ±ş¤¹¤ë³ç¸Ì¤òÉ½¼¨
+"æ‹¬å¼§å…¥åŠ›æ™‚ã®å¯¾å¿œã™ã‚‹æ‹¬å¼§ã‚’è¡¨ç¤º
 set showmatch
-"¸¡º÷·ë²ÌÊ¸»úÎó¤Î¥Ï¥¤¥é¥¤¥È¤òÍ­¸ú¤Ë¤¹¤ë
+"æ¤œç´¢çµæœæ–‡å­—åˆ—ã®ãƒã‚¤ãƒ©ã‚¤ãƒˆã‚’æœ‰åŠ¹ã«ã™ã‚‹
 set hlsearch
-"¥¹¥Æ¡¼¥¿¥¹¥é¥¤¥ó¤ò¾ï¤ËÉ½¼¨
+"ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒ©ã‚¤ãƒ³ã‚’å¸¸ã«è¡¨ç¤º
 set laststatus=2
-"¥¹¥Æ¡¼¥¿¥¹¥é¥¤¥ó¤ËÊ¸»ú¥³¡¼¥É¤È²ş¹ÔÊ¸»ú¤òÉ½¼¨¤¹¤ë
+"ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒ©ã‚¤ãƒ³ã«æ–‡å­—ã‚³ãƒ¼ãƒ‰ã¨æ”¹è¡Œæ–‡å­—ã‚’è¡¨ç¤ºã™ã‚‹
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
-"²ş¹ÔÊ¸»ú¡¢Á´³Ñ¥¹¥Ú¡¼¥¹¤òÉ½¼¨$
+"æ”¹è¡Œæ–‡å­—ã€å…¨è§’ã‚¹ãƒšãƒ¼ã‚¹ã‚’è¡¨ç¤º$
 set list
 set lcs=tab:>.,trail:_,extends:\
 highlight JpSpace cterm=underline ctermfg=Blue guifg=Blue
-au BufRead,BufNew * match JpSpace /¡¡/
+au BufRead,BufNew * match JpSpace /ã€€/
 
-""¥«¥ì¥ó¥È¹Ô¤ÎÊ¸»ú¿ô
+""ã‚«ãƒ¬ãƒ³ãƒˆè¡Œã®æ–‡å­—æ•°
 "function! CurrentLineLength()
 "  let len = strlen(getline("."))
 "  return len
 "endfunction
 
 "-----------------------------------------------------------------------------
-" ¥Ş¥Ã¥×ÄêµÁ
+" ãƒãƒƒãƒ—å®šç¾©
 "
-"¥Ğ¥Ã¥Õ¥¡°ÜÆ°ÍÑ¥­¡¼¥Ş¥Ã¥×
-" F2: Á°¤Î¥Ğ¥Ã¥Õ¥¡
-" F3: ¼¡¤Î¥Ğ¥Ã¥Õ¥¡
-" F4: ¥Ğ¥Ã¥Õ¥¡ºï½ü
+"ãƒãƒƒãƒ•ã‚¡ç§»å‹•ç”¨ã‚­ãƒ¼ãƒãƒƒãƒ—
+" F2: å‰ã®ãƒãƒƒãƒ•ã‚¡
+" F3: æ¬¡ã®ãƒãƒƒãƒ•ã‚¡
+" F4: ãƒãƒƒãƒ•ã‚¡å‰Šé™¤
 map <F2> <ESC>:bp<CR>
 map <F3> <ESC>:bn<CR>
 map <F4> <ESC>:bw<CR>
-"É½¼¨¹ÔÃ±°Ì¤Ç¹Ô°ÜÆ°¤¹¤ë
+"è¡¨ç¤ºè¡Œå˜ä½ã§è¡Œç§»å‹•ã™ã‚‹
 nnoremap j gjzz
 nnoremap k gkzz
-""¥Õ¥ì¡¼¥à¥µ¥¤¥º¤òÂÕÂÆ¤ËÊÑ¹¹¤¹¤ë
+""ãƒ•ãƒ¬ãƒ¼ãƒ ã‚µã‚¤ã‚ºã‚’æ€ æƒ°ã«å¤‰æ›´ã™ã‚‹
 "map <kPlus> <C-W>+
 "map <kMinus> <C-W>-
 
-"windowÁàºî
+"windowæ“ä½œ
 nnoremap wh <C-w>h
 nnoremap wj <C-w>j
 nnoremap wk <C-w>k
 nnoremap wl <C-w>l
  
-"TabÁàºî
+"Tabæ“ä½œ
 nnoremap tn :<C-u>tabnew<Cr>
 nnoremap th :<C-u>tabprev<Cr>
 nnoremap tl :<C-u>tabnext<Cr>
 nnoremap tc :<C-u>tabclose<Cr>
  
-"Window ¥Õ¥ì¡¼¥à¥µ¥¤¥º
+"Window ãƒ•ãƒ¬ãƒ¼ãƒ ã‚µã‚¤ã‚º
 nnoremap + 4<C-w>+
 nnoremap - 4<C-w>-
 nnoremap { 4<C-w><
